@@ -3,3 +3,5 @@
 litellm_config.yaml
 __pycache__/
 *.pyc
+dist/
+INSTALL.md
