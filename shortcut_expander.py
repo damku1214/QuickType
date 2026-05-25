@@ -1,13 +1,15 @@
 import logging
 from pynput import keyboard
 from config_loader import ConfigLoader
+import os
+from pathlib import Path
 
 logging.basicConfig(level=logging.INFO)
 
 class ShortcutExpander:
     def __init__(self):
         self.buffer = ""
-        self.config_loader = ConfigLoader("config.json")
+        self.config_loader = ConfigLoader(str(Path(os.environ.get('LOCALAPPDATA', '.')) / 'QuickType' / 'config.json'))
         self.trigger_character = self.config_loader.trigger_character
         self.shortcuts = self.config_loader.shortcuts
         self.is_listening = False
