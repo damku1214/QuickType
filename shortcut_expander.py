@@ -1,10 +1,7 @@
-import logging
 from pynput import keyboard
 from config_loader import ConfigLoader
 import os
 from pathlib import Path
-
-logging.basicConfig(level=logging.INFO)
 
 class ShortcutExpander:
     def __init__(self):
@@ -26,7 +23,7 @@ class ShortcutExpander:
             elif self.is_listening:
                 self.process_input(key)
         except Exception as e:
-            logging.error(f"Error handling key press: {e}")
+            pass
 
     def toggle_listening(self):
         if self.is_listening:
