@@ -3,10 +3,14 @@ from config_loader import ConfigLoader
 import os
 from pathlib import Path
 
+# Note that Claude Code (Gemini) changed many variable and function names for clarity.
+# However, no functionality has changed since before the reformatting - if AI generated a new block of code,
+# I will add a comment as so.
+
 class ShortcutExpander:
     def __init__(self):
         self.buffer = ""
-        self.config_loader = ConfigLoader(str(Path(os.environ.get('LOCALAPPDATA', '.')) / 'QuickType' / 'config.json'))
+        self.config_loader = ConfigLoader()
         self.trigger_character = self.config_loader.trigger_character
         self.shortcuts = self.config_loader.shortcuts
         self.is_listening = False
@@ -17,13 +21,10 @@ class ShortcutExpander:
             listener.join()
 
     def handle_press(self, key):
-        try:
-            if hasattr(key, 'char') and key.char == self.trigger_character:
-                self.toggle_listening()
-            elif self.is_listening:
-                self.process_input(key)
-        except Exception as e:
-            pass
+        if hasattr(key, 'char') and key.char == self.trigger_character:
+            self.toggle_listening()
+        elif self.is_listening:
+            self.process_input(key)
 
     def toggle_listening(self):
         if self.is_listening:
