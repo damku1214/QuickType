@@ -2,6 +2,8 @@ from pynput import keyboard
 from config_loader import ConfigLoader
 import os
 from pathlib import Path
+import clipboard
+import sys
 
 # Note that Claude Code (Gemini) changed many variable and function names for clarity.
 # However, no functionality has changed since before the reformatting - if AI generated a new block of code,
@@ -21,6 +23,7 @@ class ShortcutExpander:
             listener.join()
 
     def handle_press(self, key):
+        # hasattr() suggested by Gemini instead of using .isalpha() and .isalnum()
         if hasattr(key, 'char') and key.char == self.trigger_character:
             self.toggle_listening()
         elif self.is_listening:
@@ -61,7 +64,22 @@ class ShortcutExpander:
         self.keyboard_controller.release(keyboard.Key.shift)
         self.keyboard_controller.release(keyboard.Key.shift_r)
 
-        self.keyboard_controller.type(expansion_text)
+        clipboard.copy(expansion_text)
+
+        # sys.platform check found on the internet - checks if OS is mac or windows and
+        # presses diff keys respectively
+        if sys.platform == "darwin":
+            self.keyboard_controller.press(keyboard.Key.cmd)
+        else:
+            self.keyboard_controller.press(keyboard.Key.ctrl)
+        
+        self.keyboard_controller.press("v")
+        self.keyboard_controller.release("v")
+
+        if sys.platform == "darwin":
+            self.keyboard_controller.release(keyboard.Key.cmd)
+        else:
+            self.keyboard_controller.release(keyboard.Key.ctrl)
 
         self.reset_state()
 
