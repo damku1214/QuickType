@@ -75,7 +75,7 @@ class ShortcutExpander:
         
         self.keyboard_controller.press("v")
         self.keyboard_controller.release("v")
-
+        
         if sys.platform == "darwin":
             self.keyboard_controller.release(keyboard.Key.cmd)
         else:
