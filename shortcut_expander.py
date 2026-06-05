@@ -83,5 +83,6 @@ class ShortcutExpander:
 
         self.reset_state()
 
+
 if __name__ == "__main__":
     ShortcutExpander()
