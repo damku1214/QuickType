@@ -3,5 +3,10 @@
 litellm_config.yaml
 __pycache__/
 *.pyc
+<<<<<<< HEAD
 dist/
 build/
+=======
+build/
+dist/
+>>>>>>> main

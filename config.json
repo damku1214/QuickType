@@ -1,5 +1,9 @@
 {
     "trigger_character": ":",
+<<<<<<< HEAD
+=======
+    "reload_character": "`",
+>>>>>>> main
     "shortcuts": {
         "son": "😭💔🥀",
         "plz": "😭🙏",
