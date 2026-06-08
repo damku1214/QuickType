@@ -12,10 +12,8 @@ class ConfigLoader:
         if not os.path.exists(self.config_file_path):
             self.config_file_path.parent.mkdir(parents=True, exist_ok=True)
             with open(self.config_file_path, "w", encoding='utf-8') as file:
-                json.dump({"trigger_character": ":", "shortcuts": {}}, file, indent=4)
+                json.dump({"trigger_character": ":", "reload_character": "`", "shortcuts": {}}, file, indent=4)
 
-        self.trigger_character = ":"
-        self.shortcuts = {}
         self.load()
 
     def load(self):
@@ -23,4 +21,5 @@ class ConfigLoader:
         with open(self.config_file_path, "r", encoding='utf-8') as file:
             data = json.load(file)
             self.trigger_character = data.get("trigger_character", ":")
+            self.reload_character = data.get("reload_character", "`")
             self.shortcuts = data.get("shortcuts", {})

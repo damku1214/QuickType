@@ -9,11 +9,12 @@ import sys
 # However, no functionality has changed since before the reformatting - if AI generated a new block of code,
 # I will add a comment as so.
 
-class ShortcutExpander:
+class QuickType:
     def __init__(self):
         self.buffer = ""
         self.config_loader = ConfigLoader()
         self.trigger_character = self.config_loader.trigger_character
+        self.reload_character = self.config_loader.reload_character
         self.shortcuts = self.config_loader.shortcuts
         self.is_listening = False
         self.keyboard_controller = keyboard.Controller()
@@ -26,6 +27,11 @@ class ShortcutExpander:
         # hasattr() suggested by Gemini instead of using .isalpha() and .isalnum()
         if hasattr(key, 'char') and key.char == self.trigger_character:
             self.toggle_listening()
+        elif hasattr(key, 'char') and key.char == self.reload_character:
+            self.config_loader.load()
+            self.trigger_character = self.config_loader.trigger_character
+            self.reload_character = self.config_loader.reload_character
+            self.shortcuts = self.config_loader.shortcuts
         elif self.is_listening:
             self.process_input(key)
 
@@ -85,4 +91,4 @@ class ShortcutExpander:
 
 
 if __name__ == "__main__":
-    ShortcutExpander()
+    quick_type = QuickType()
