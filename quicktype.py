@@ -11,64 +11,64 @@ import sys
 
 class QuickType:
     def __init__(self):
-        self.buffer = ""
-        self.config_loader = ConfigLoader()
-        self.trigger_character = self.config_loader.trigger_character
-        self.reload_character = self.config_loader.reload_character
-        self.shortcuts = self.config_loader.shortcuts
-        self.is_listening = False
-        self.keyboard_controller = keyboard.Controller()
-        self.cancel_keys = {keyboard.Key.tab, keyboard.Key.esc}
+        self.__buffer = ""
+        self.__config_loader = ConfigLoader()
+        self.__trigger_character = self.__config_loader.get_trigger_char()
+        self.__reload_character = self.__config_loader.get_reload_char()
+        self.__shortcuts = self.__config_loader.get_shortcuts()
+        self.__is_listening = False
+        self.__keyboard_controller = keyboard.Controller()
+        self.__cancel_keys = {keyboard.Key.tab, keyboard.Key.esc}
 
         with keyboard.Listener(on_press=self.handle_press) as listener:
             listener.join()
 
     def handle_press(self, key):
         # hasattr() suggested by Gemini instead of using .isalpha() and .isalnum()
-        if hasattr(key, 'char') and key.char == self.trigger_character:
+        if hasattr(key, 'char') and key.char == self.__trigger_character:
             self.toggle_listening()
-        elif hasattr(key, 'char') and key.char == self.reload_character:
-            self.config_loader.load()
-            self.trigger_character = self.config_loader.trigger_character
-            self.reload_character = self.config_loader.reload_character
-            self.shortcuts = self.config_loader.shortcuts
-        elif self.is_listening:
+        elif hasattr(key, 'char') and key.char == self.__reload_character:
+            self.__config_loader.load()
+            self.__trigger_character = self.__config_loader.get_trigger_char()
+            self.reload_character = self.__config_loader.get_reload_char()
+            self.__shortcuts = self.__config_loader.get_shortcuts()
+        elif self.__is_listening:
             self.process_input(key)
 
     def toggle_listening(self):
-        if self.is_listening:
+        if self.__is_listening:
             self.expand_shortcut()
         else:
-            self.is_listening = True
-            self.buffer = self.trigger_character
+            self.__is_listening = True
+            self.__buffer = self.__trigger_character
 
     def process_input(self, key):
         if hasattr(key, 'char'):
-            self.buffer += key.char
+            self.__buffer += key.char
         elif key == keyboard.Key.backspace:
-            self.buffer = self.buffer[:-1]
-        elif key in self.cancel_keys:
+            self.__buffer = self.__buffer[:-1]
+        elif key in self.__cancel_keys:
             self.reset_state()
 
     def reset_state(self):
-        self.buffer = ""
-        self.is_listening = False
+        self.__buffer = ""
+        self.__is_listening = False
 
     def expand_shortcut(self):
-        self.buffer += self.trigger_character
-        shortcut_name = self.buffer[1:-1]
+        self.__buffer += self.__trigger_character
+        shortcut_name = self.__buffer[1:-1]
 
-        if shortcut_name not in self.shortcuts:
+        if shortcut_name not in self.__shortcuts:
             self.reset_state()
             return
 
-        expansion_text = self.shortcuts[shortcut_name]
+        expansion_text = self.__shortcuts[shortcut_name]
 
-        for _ in range(len(self.buffer)):
-            self.keyboard_controller.tap(keyboard.Key.backspace)
+        for _ in range(len(self.__buffer)):
+            self.__keyboard_controller.tap(keyboard.Key.backspace)
 
-        self.keyboard_controller.release(keyboard.Key.shift)
-        self.keyboard_controller.release(keyboard.Key.shift_r)
+        self.__keyboard_controller.release(keyboard.Key.shift)
+        self.__keyboard_controller.release(keyboard.Key.shift_r)
 
         clipboard.copy(expansion_text)
 
@@ -77,15 +77,15 @@ class QuickType:
         if sys.platform == "darwin":
             self.keyboard_controller.press(keyboard.Key.cmd)
         else:
-            self.keyboard_controller.press(keyboard.Key.ctrl)
+            self.__keyboard_controller.press(keyboard.Key.ctrl)
         
-        self.keyboard_controller.press("v")
-        self.keyboard_controller.release("v")
+        self.__keyboard_controller.press("v")
+        self.__keyboard_controller.release("v")
         
         if sys.platform == "darwin":
-            self.keyboard_controller.release(keyboard.Key.cmd)
+            self.__keyboard_controller.release(keyboard.Key.cmd)
         else:
-            self.keyboard_controller.release(keyboard.Key.ctrl)
+            self.__keyboard_controller.release(keyboard.Key.ctrl)
 
         self.reset_state()
 

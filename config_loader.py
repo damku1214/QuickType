@@ -15,20 +15,29 @@ class ConfigLoader:
             # QuickType doesn't support an OS other than windows and mac. Here be dragons!
             base_dir = Path.home() / '.config'
 
-        self.config_file_path = base_dir / 'QuickType' / 'config.json'
+        self.__config_file_path = base_dir / 'QuickType' / 'config.json'
 
         # Gemini added this whole if statement that adds the file at the directory if it isn't present
-        if not os.path.exists(self.config_file_path):
-            self.config_file_path.parent.mkdir(parents=True, exist_ok=True)
-            with open(self.config_file_path, "w", encoding='utf-8') as file:
+        if not os.path.exists(self.__config_file_path):
+            self.__config_file_path.parent.mkdir(parents=True, exist_ok=True)
+            with open(self.__config_file_path, "w", encoding='utf-8') as file:
                 json.dump({"trigger_character": ":", "reload_character": "`", "shortcuts": {}}, file, indent=4)
 
         self.load()
 
     def load(self):
         # Gemini added the encoding='utf-8' to fix a bug where some characters were not recognized
-        with open(self.config_file_path, "r", encoding='utf-8') as file:
+        with open(self.__config_file_path, "r", encoding='utf-8') as file:
             data = json.load(file)
-            self.trigger_character = data.get("trigger_character", ":")
-            self.reload_character = data.get("reload_character", "`")
-            self.shortcuts = data.get("shortcuts", {})
+            self.__trigger_character = data.get("trigger_character", ":")
+            self.__reload_character = data.get("reload_character", "`")
+            self.__shortcuts = data.get("shortcuts", {})
+    
+    def get_trigger_char(self):
+        return self.__trigger_character
+    
+    def get_reload_char(self):
+        return self.__reload_character
+    
+    def get_shortcuts(self):
+        return self.__shortcuts
