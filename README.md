@@ -15,7 +15,7 @@ Be aware that the config entries must be customized first for the app to have an
 ## Getting Started
 1. **Download**: [Get the latest version here](https://github.com/damku1214/QuickType/releases/latest).
 2. **Setup**: Make sure you have [Python](https://www.python.org/) installed.
-3. **Run**: Double-click (or run from terminal) `quicktype.py`.
+3. **Run**: Double-click `QuickType.exe` / `QuickType.app` or run `quicktype.py` from the source code.
 
 ## Customization
 Everything happens in the `config.json` file. Open it, and you must add `"shortcut": "output"` pairs to `shortcuts: {}`. Add your own to expand your productivity!
