@@ -25,6 +25,7 @@ class ConfigLoader:
 
         self.load()
 
+    ## Attatches all values from config.json to its respective variables
     def load(self):
         # Gemini added the encoding='utf-8' to fix a bug where some characters were not recognized
         with open(self.__config_file_path, "r", encoding='utf-8') as file:
@@ -33,6 +34,7 @@ class ConfigLoader:
             self.__reload_character = data.get("reload_character", "`")
             self.__shortcuts = data.get("shortcuts", {})
     
+    ## Simple getters created due to encapsulation. Setters are not required due to the absence of reassigning variables
     def get_trigger_char(self):
         return self.__trigger_character
     
