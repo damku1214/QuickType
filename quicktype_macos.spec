@@ -13,28 +13,40 @@ a = Analysis(
     noarchive=False,
     optimize=0,
 )
+
 pyz = PYZ(a.pure)
 
+exe = EXE(
+    pyz,
+    a.scripts,
+    [],                  # <-- empty! binaries/datas go to COLLECT instead
+    exclude_binaries=True,  # <-- required for onedir mode
+    name='QuickType',
+    debug=False,
+    bootloader_ignore_signals=False,
+    strip=False,
+    upx=True,
+    upx_exclude=[],
+    console=False,
+    disable_windowed_traceback=False,
+    argv_emulation=True,
+    target_arch='x86_64',
+    codesign_identity=None,
+    entitlements_file=None,
+)
+
+coll = COLLECT(
+    exe,
+    a.binaries,
+    a.datas,
+    strip=False,
+    upx=True,
+    upx_exclude=[],
+    name='QuickType',
+)
+
 app = BUNDLE(
-    EXE(
-        pyz,
-        a.scripts,
-        a.binaries,
-        a.datas,
-        name='QuickType',
-        debug=False,
-        bootloader_ignore_signals=False,
-        strip=False,
-        upx=True,
-        upx_exclude=[],
-        runtime_tmpdir=None,
-        console=False,
-        disable_windowed_traceback=False,
-        argv_emulation=True,
-        target_arch='x86_64',
-        codesign_identity=None,
-        entitlements_file=None,
-    ),
+    coll,                # <-- pass COLLECT, not EXE
     name='QuickType.app',
     bundle_identifier='com.damku1214.quicktype',
 )
