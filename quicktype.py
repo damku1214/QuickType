@@ -28,7 +28,7 @@ class QuickType:
         elif hasattr(key, 'char') and key.char == self.__reload_character:
             self.__config_loader.load()
             self.__trigger_character = self.__config_loader.get_trigger_char()
-            self.reload_character = self.__config_loader.get_reload_char()
+            self.__reload_character = self.__config_loader.get_reload_char()
             self.__shortcuts = self.__config_loader.get_shortcuts()
         elif self.__is_listening:
             self.process_input(key)
