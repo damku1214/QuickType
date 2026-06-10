@@ -24,5 +24,5 @@ Check the [GitHub Wiki](https://github.com/damku1214/QuickType/wiki) for:
 - **macOS**: You must grant "Accessibility" permissions to your terminal or the app in *System Settings* > *Privacy & Security* > *Accessibility*.
 
 ---
-*QuickType is open source (GPLv3).*
+*QuickType is open source under the **GNU GPL v3** license.*
 
