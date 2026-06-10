@@ -18,7 +18,6 @@ Everything happens in the `config.json` file. Open it, and you'll see simple `"s
 Check the [GitHub Wiki](https://github.com/damku1214/QuickType/wiki) for:
 - **Installation Guides**: Step-by-step for Windows & macOS.
 - **Troubleshooting**: Fixes for common issues.
-- **Pro Tips**: How to create complex expansions.
 
 ### Platform-Specific Notes
 - **macOS**: You must grant "Accessibility" permissions to your terminal or the app in *System Settings* > *Privacy & Security* > *Accessibility*.
