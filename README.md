@@ -2,7 +2,7 @@
 
 **Keyboard shortcuts in your pocket!**
 
-QuickType is a simple, powerful tool that expands your favorite shortcuts into text, emojis, URLs, or special characters—instantly, in any app.
+QuickType is a simple, powerful tool that expands your favorite shortcuts into text, emojis, URLs, or special characters instantly, in any app.
 
 ---
 
