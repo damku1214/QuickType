@@ -4,15 +4,21 @@
 
 QuickType is a simple, powerful tool that expands your favorite shortcuts into text, emojis, URLs, or special characters instantly, in any app.
 
+All you need to do is put a shortcut in between trigger characters (`:` by default).
+
+**Example**: typing `:son:` anywhere will automatically change it to `😭💔🥀`.
+
+Be aware that the config entries must be customized for the app to hae any effect!
+
 ---
 
 ## Getting Started
 1. **Download**: [Get the latest version here](https://github.com/damku1214/QuickType/releases/latest).
 2. **Setup**: Make sure you have [Python](https://www.python.org/) installed.
-3. **Run**: Double-click (or run from terminal) `shortcut_expander.py`.
+3. **Run**: Double-click (or run from terminal) `quicktype.py`.
 
 ## Customization
-Everything happens in the `config.json` file. Open it, and you'll see simple `"shortcut": "expansion"` pairs. Add your own to expand your productivity!
+Everything happens in the `config.json` file. Open it, and you must add `"shortcut": "output"` pairs to `shortcuts: {}`. Add your own to expand your productivity!
 
 ## Sources for Help
 Check the [GitHub Wiki](https://github.com/damku1214/QuickType/wiki) for:
