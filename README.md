@@ -8,7 +8,7 @@ All you need to do is put a shortcut in between trigger characters (`:` by defau
 
 **Example**: typing `:son:` anywhere will automatically change it to `😭💔🥀`.
 
-Be aware that the config entries must be customized for the app to hae any effect!
+Be aware that the config entries must be customized for the app to have any effect!
 
 ---
 
