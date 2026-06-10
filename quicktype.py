@@ -1,7 +1,5 @@
 from pynput import keyboard
 from config_loader import ConfigLoader
-import os
-from pathlib import Path
 import clipboard
 import sys
 
