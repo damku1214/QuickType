@@ -1,4 +1,5 @@
 {
+    "__comment": "This is NOT the real config.json file. The real one will be generated in your AppData/Local - this is just an example of what your config.json could look like.",
     "trigger_character": ":",
     "reload_character": "`",
     "shortcuts": {
